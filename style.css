@@ -1,0 +1,22 @@
+body{
+    padding: 100px;
+}
+#balance-show{
+    display: none;
+}
+.status{
+    border-radius: .5em;
+    color: whitesmoke; 
+    text-align: center;
+    margin: 1em;
+    padding: 1em 0;
+}
+.deposite{
+    background-color: slateblue;  
+}
+.withdraw{
+    background-color: lightsalmon;
+}
+.balance{
+    background-color: orange;
+}

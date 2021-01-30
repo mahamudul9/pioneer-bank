@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="login-area">
+        <h1 class="text-center">Welcome To Pioneer Bank</h1>
+        <div class="submit-area shadow p-3 mb-5 bg-white rounded">
+            <h2>Login</h2><br>
+            <input type="email" class="form-control" placeholder="Email" ><br>
+            <input type="password" class="form-control" placeholder="Password" ><br>
+            <button id="login" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+    <div id="balance-show">
+        <div class="row justify-content-between">
+            <div class="col-md-4">
+                <div class="deposite status">
+                    <h5>Deposite</h5>
+                    <h2>$<span id="currentAmount">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="totalWithdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$<span id="currentBalance">00</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- deposit and withdraw maker -->
+        <div class="money-transfer">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="money-box shadow bg-white p-3 mt-5 rounded">
+                        <h3>Deposit</h3>
+                        <input id="depositAmount" type="text" class="form-control" placeholder="$amount you want to deposite"><br>
+                        <button id="addDeposit" class="btn btn-success mt-3">Deposit</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="money-box shadow bg-white p-3 mt-5 rounded">
+                        <h3>Withdraw</h3>
+                        <input id="withdrawAmount" type="text" class="form-control" placeholder="$amount you want to withdraw"><br>
+                        <button id="addWithdraw" class=" btn btn-success mt-3">Withdraw</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        //login button event handlar
+        const loginButton = document.getElementById("login");
+        loginButton.addEventListener("click", function () {
+            document.getElementById("login-area").style.display = "none";
+            document.getElementById("balance-show").style.display = "block";
+        })
+
+        
+        //deposit maker button
+        document.getElementById("addDeposit").addEventListener("click", function(){
+            const depositNumber= getInputNumber("depositAmount");
+
+            updateSpanText("currentAmount",depositNumber);
+            updateSpanText("currentBalance",depositNumber);       
+            document.getElementById("depositAmount").value="";
+        })
+        //balance function
+        function updateSpanText(id, number){
+            const current= document.getElementById(id).innerText;
+            const currentNumber= parseFloat(current); 
+            const total= currentNumber+number;
+            document.getElementById(id).innerText=total;
+        }
+        function getInputNumber(id){
+            const amount= document.getElementById(id).value;
+            const amountNumber= parseFloat(amount);
+            return amountNumber;
+        }
+
+        // withdraw maker button
+        document.getElementById("addWithdraw").addEventListener("click", function(){
+            const withdrawNumber= getInputNumber("withdrawAmount");
+            
+            updateSpanText("totalWithdraw",withdrawNumber);
+            updateSpanText("currentBalance", -1 * withdrawNumber);
+            document.getElementById("withdrawAmount").value="";
+
+        })
+        
+
+
+
+
+    </script>
+
+</body>
+
+</html>
